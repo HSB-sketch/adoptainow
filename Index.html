@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AdoptAI Now — Level Up Your Life with AI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Righteous&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:#0F0F1A;--bg2:#1A1A2E;--bg3:#16213E;
+      --green:#10B981;--amber:#F59E0B;--purple:#8B5CF6;
+      --white:#F8FAFC;--gray:#94A3B8;--border:rgba(255,255,255,0.08);
+      --font-h:'Righteous',cursive;--font-b:'Quicksand',sans-serif;--r:16px;
+    }
+    html{scroll-behavior:smooth}
+    body{font-family:var(--font-b);background:var(--bg);color:var(--white);overflow-x:hidden;min-height:100vh}
+    body::before{content:'';position:fixed;inset:0;z-index:0;background-image:radial-gradient(1px 1px at 20% 30%,rgba(255,255,255,.4) 0%,transparent 100%),radial-gradient(1px 1px at 60% 10%,rgba(255,255,255,.3) 0%,transparent 100%),radial-gradient(1px 1px at 80% 60%,rgba(255,255,255,.25) 0%,transparent 100%),radial-gradient(2px 2px at 40% 80%,rgba(255,255,255,.2) 0%,transparent 100%),radial-gradient(1px 1px at 90% 40%,rgba(255,255,255,.3) 0%,transparent 100%);pointer-events:none}
+
+    nav{position:sticky;top:0;z-index:200;background:rgba(15,15,26,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 5%}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;height:68px;gap:1rem}
+    .logo{font-family:var(--font-h);font-size:1.3rem}.logo .a{color:var(--green)}.logo .b{color:var(--amber)}.logo .c{color:var(--purple)}
+    .nav-tabs{display:flex;gap:.3rem;list-style:none;flex-wrap:wrap}
+    .nav-tabs button{font-family:var(--font-b);font-weight:700;font-size:.82rem;letter-spacing:.04em;background:none;border:1px solid transparent;color:var(--gray);cursor:pointer;padding:.45rem 1rem;border-radius:100px;transition:all .2s}
+    .nav-tabs button:hover{color:var(--white);border-color:var(--border)}
+    .nav-tabs button.active.g{background:rgba(16,185,129,.15);border-color:var(--green);color:var(--green)}
+    .nav-tabs button.active.a{background:rgba(245,158,11,.15);border-color:var(--amber);color:var(--amber)}
+    .nav-tabs button.active.p{background:rgba(139,92,246,.15);border-color:var(--purple);color:var(--purple)}
+    .nav-tabs button.active.w{background:rgba(248,250,252,.1);border-color:rgba(248,250,252,.3);color:var(--white)}
+
+    .page{display:none;position:relative;z-index:1;animation:fadeUp .4s ease}
+    .page.active{display:block}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+    .hero{padding:5rem 5% 4rem;text-align:center;position:relative;overflow:hidden}
+    .glow{position:absolute;border-radius:50%;filter:blur(80px);opacity:.2;pointer-events:none}
+    .badge{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--font-h);font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;padding:.4rem 1.2rem;border-radius:100px;border:1px solid;margin-bottom:1.5rem}
+    .hero h1{font-family:var(--font-h);font-size:clamp(2.5rem,6vw,5rem);line-height:1.05;margin-bottom:1.2rem}
+    .hero p{font-size:clamp(1rem,2vw,1.2rem);color:var(--gray);max-width:600px;margin:0 auto 2.5rem;line-height:1.75;font-weight:600}
+
+    .section{padding:3.5rem 5%}
+    .stitle{font-family:var(--font-h);font-size:clamp(1.6rem,3.5vw,2.4rem);margin-bottom:.5rem}
+    .ssub{color:var(--gray);font-size:1rem;font-weight:600;margin-bottom:2.5rem;max-width:520px}
+
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.2rem}
+    .card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:1.8rem;transition:transform .25s,border-color .25s,box-shadow .25s;position:relative;overflow:hidden}
+    .card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:var(--r) var(--r) 0 0}
+    .card:hover{transform:translateY(-4px);box-shadow:0 12px 35px rgba(0,0,0,.4)}
+    .card.g::before{background:var(--green)}.card.g:hover{border-color:rgba(16,185,129,.35)}
+    .card.a::before{background:var(--amber)}.card.a:hover{border-color:rgba(245,158,11,.35)}
+    .card.p::before{background:var(--purple)}.card.p:hover{border-color:rgba(139,92,246,.35)}
+    .icon{font-size:2.2rem;margin-bottom:1rem;display:block}
+    .tag{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.25rem .7rem;border-radius:100px;margin-bottom:.8rem}
+    .tag.g{background:rgba(16,185,129,.15);color:var(--green)}
+    .tag.a{background:rgba(245,158,11,.15);color:var(--amber)}
+    .tag.p{background:rgba(139,92,246,.15);color:var(--purple)}
+    .card h3{font-family:var(--font-h);font-size:1.1rem;margin-bottom:.5rem}
+    .card p{color:var(--gray);font-size:.9rem;line-height:1.65;font-weight:600}
+
+    .pbox{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);margin-top:1rem;overflow:hidden}
+    .plabel{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.5rem 1rem;background:rgba(255,255,255,.04);color:var(--gray)}
+    .ptext{padding:.9rem 1rem;font-size:.88rem;font-style:italic;color:rgba(248,250,252,.8);line-height:1.6;font-weight:600}
+
+    .pills{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1rem}
+    .pill{font-size:.78rem;font-weight:700;padding:.3rem .8rem;border-radius:100px;border:1px solid var(--border);color:var(--gray);background:rgba(255,255,255,.04)}
+
+    .ibox{border-radius:var(--r);padding:1.4rem 1.8rem;margin:2rem 0;display:flex;gap:1rem}
+    .ibox.g{background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.25)}
+    .ibox.a{background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.25)}
+    .ibox.p{background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.25)}
+    .ibox span{font-size:1.8rem}.ibox div strong{display:block;font-size:.95rem;margin-bottom:.3rem;color:var(--white)}
+    .ibox div p{font-size:.9rem;color:var(--gray);line-height:1.6;font-weight:600}
+
+    .lpath{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin:2rem 0}
+    .lcard{border-radius:var(--r);padding:1.8rem;text-align:center;cursor:pointer;transition:transform .2s,box-shadow .2s;border:1px solid var(--border)}
+    .lcard:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(0,0,0,.4)}
+    .lcard.g{background:rgba(16,185,129,.1)}.lcard.a{background:rgba(245,158,11,.1)}.lcard.p{background:rgba(139,92,246,.1)}
+    .lcard .le{font-size:2.8rem;display:block;margin-bottom:.8rem}
+    .lcard h3{font-family:var(--font-h);font-size:1.2rem;margin-bottom:.5rem}
+    .lcard p{font-size:.85rem;color:var(--gray);line-height:1.6;font-weight:600}
+    .lbtn{display:inline-block;margin-top:1rem;font-size:.8rem;font-weight:700;padding:.45rem 1.2rem;border-radius:100px;border:none;cursor:pointer;font-family:var(--font-b)}
+    .lcard.g .lbtn{background:var(--green);color:#fff}.lcard.a .lbtn{background:var(--amber);color:#fff}.lcard.p .lbtn{background:var(--purple);color:#fff}
+
+    .xpwrap{margin:2rem 0}.xplabel{font-size:.82rem;font-weight:700;color:var(--gray);margin-bottom:.5rem;letter-spacing:.06em;text-transform:uppercase}
+    .xpbar{height:10px;background:rgba(255,255,255,.08);border-radius:100px;overflow:hidden}
+    .xpfill{height:100%;border-radius:100px;animation:fillBar 1.5s ease forwards}
+    @keyframes fillBar{from{width:0}}
+
+    .checklist{list-style:none;display:flex;flex-direction:column;gap:.7rem;margin:1.5rem 0}
+    .checklist li{display:flex;gap:.8rem;align-items:flex-start;font-size:.92rem;color:rgba(248,250,252,.85);font-weight:600;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:.9rem 1.1rem}
+    .checklist li .chk{font-size:1.1rem}
+
+    .statrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem;margin:2rem 0}
+    .sbox{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:1.5rem;text-align:center}
+    .snum{font-family:var(--font-h);font-size:2.2rem;display:block;margin-bottom:.3rem}
+    .sbox p{font-size:.82rem;color:var(--gray);font-weight:600}
+
+    .btn{font-family:var(--font-b);font-weight:700;font-size:.95rem;padding:.85rem 2rem;border-radius:100px;border:none;cursor:pointer;transition:transform .2s,box-shadow .2s;display:inline-block}
+    .btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.3)}
+    .btn.g{background:var(--green);color:#fff}.btn.a{background:var(--amber);color:#fff}
+    .btn.p{background:var(--purple);color:#fff}.btn.ghost{background:rgba(255,255,255,.08);color:var(--white);border:1px solid var(--border)}
+    .divider{height:1px;background:var(--border);margin:3rem 0}
+
+    @media(max-width:640px){.nav-tabs{flex-wrap:wrap}.nav-tabs button{font-size:.72rem;padding:.35rem .7rem}}
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo"><span class="a">Adopt</span><span class="b">AI</span><span class="c">Now</span></div>
+    <ul class="nav-tabs">
+      <li><button onclick="go('home')" id="nav-home" class="active w">🏠 Home</button></li>
+      <li><button onclick="go('beginner')" id="nav-beginner" class="g">🌱 Beginner</button></li>
+      <li><button onclick="go('intermediate')" id="nav-intermediate" class="a">🚀 Intermediate</button></li>
+      <li><button onclick="go('advanced')" id="nav-advanced" class="p">⚡ Advanced</button></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HOME -->
+<div class="page active" id="page-home">
+  <div class="hero">
+    <div class="glow" style="width:700px;height:400px;background:conic-gradient(var(--green),var(--amber),var(--purple),var(--green));top:-150px;left:50%;transform:translateX(-50%)"></div>
+    <div class="badge" style="border-color:rgba(248,250,252,.2);color:var(--white)">🤖 Your AI Adoption Journey</div>
+    <h1>Stop Watching.<br><span style="color:var(--green)">Start Using</span> AI.</h1>
+    <p>AI isn't just for tech people. This guide shows you exactly how to weave AI into YOUR daily life — at whatever pace feels right for you.</p>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+      <button class="btn g" onclick="go('beginner')">Start at Beginner 🌱</button>
+      <button class="btn ghost" onclick="go('advanced')">Jump to Advanced ⚡</button>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="statrow">
+      <div class="sbox"><span class="snum" style="color:var(--green)">77%</span><p>of people use AI daily without realising it</p></div>
+      <div class="sbox"><span class="snum" style="color:var(--amber)">2hrs</span><p>average time saved per day by AI users</p></div>
+      <div class="sbox"><span class="snum" style="color:var(--purple)">Free</span><p>every use case in this guide costs $0</p></div>
+      <div class="sbox"><span class="snum" style="color:var(--green)">3</span><p>levels from complete beginner to power user</p></div>
+    </div>
+    <div class="divider"></div>
+    <h2 class="stitle">Choose Your Level 🎮</h2>
+    <p class="ssub">Pick where you are right now. You can always come back and level up!</p>
+    <div class="lpath">
+      <div class="lcard g" onclick="go('beginner')"><span class="le">🌱</span><h3>Beginner</h3><p>Never used AI for real tasks? Start here. Simple use cases that take 5 minutes and show instant value.</p><button class="lbtn">Start Here →</button></div>
+      <div class="lcard a" onclick="go('intermediate')"><span class="le">🚀</span><h3>Intermediate</h3><p>Tried AI a few times? Level up with more powerful applications for work, health, money and creativity.</p><button class="lbtn">Level Up →</button></div>
+      <div class="lcard p" onclick="go('advanced')"><span class="le">⚡</span><h3>Advanced</h3><p>Ready to go deep? Workflows, automation, and strategies that multiply what you can achieve every week.</p><button class="lbtn">Go Deep →</button></div>
+    </div>
+    <div class="divider"></div>
+    <h2 class="stitle">What Does "Adopting AI" Mean? 🤔</h2>
+    <p class="ssub">It's not about understanding how AI works — it's about making it a natural part of your day.</p>
+    <div class="grid">
+      <div class="card g"><span class="icon">🔄</span><span class="tag g">The Mindset</span><h3>Replace Habits, Not Yourself</h3><p>AI adoption means swapping time-consuming habits with smarter ones. Instead of staring at a blank email for 10 minutes, you ask AI to draft it in 10 seconds. You stay in charge — AI handles the grunt work.</p></div>
+      <div class="card a"><span class="icon">📈</span><span class="tag a">The Approach</span><h3>Start Small, Build Up</h3><p>The best AI adopters don't try to do everything at once. They pick one or two use cases, get great at those, then add more. Think of it like going to the gym — consistency beats intensity every time.</p></div>
+      <div class="card p"><span class="icon">🛡️</span><span class="tag p">The Truth</span><h3>People Who Use AI Get Ahead</h3><p>Adopting AI isn't about losing something — it's about gaining an edge. Those who build the habit now will be significantly more capable and productive than those who wait.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- BEGINNER -->
+<div class="page" id="page-beginner">
+  <div class="hero">
+    <div class="glow" style="width:500px;height:400px;background:var(--green);top:-150px;left:25%"></div>
+    <div class="badge" style="border-color:var(--green);color:var(--green);background:rgba(16,185,129,.1)">🌱 Level 1 — Beginner</div>
+    <h1>Small Steps,<br><span style="color:var(--green)">Real Results</span></h1>
+    <p>No experience needed. These use cases take under 5 minutes each and will immediately show you why millions of people use AI every single day.</p>
+  </div>
+  <div class="section">
+    <div class="xpwrap"><div class="xplabel">Level Progress</div><div class="xpbar"><div class="xpfill" style="width:33%;background:var(--green)"></div></div></div>
+    <div class="ibox g"><span>🎯</span><div><strong>Before You Start</strong><p>All you need is a free account at <strong>chat.openai.com</strong> or <strong>claude.ai</strong>. Takes 2 minutes. No credit card. Open one now in a new tab and try these as you read!</p></div></div>
+    <h2 class="stitle" style="color:var(--green)">Beginner Use Cases 🌱</h2>
+    <p class="ssub">Pick any one and try it today — seriously, right now!</p>
+    <div class="grid">
+      <div class="card g"><span class="icon">✉️</span><span class="tag g">5 min · Daily</span><h3>Write Any Email or Message</h3><p>Stuck on how to word something? Tell AI who you're writing to, what you need to say, and the tone. It drafts it instantly. You edit and send.</p><div class="pbox"><div class="plabel">Try this prompt →</div><div class="ptext">"Write a polite text to my neighbour asking them to keep noise down after 10pm. Friendly and short."</div></div><div class="pills"><span class="pill">ChatGPT</span><span class="pill">Claude</span></div></div>
+
+      <div class="card g"><span class="icon">🍽️</span><span class="tag g">5 min · Home</span><h3>Cook With What You Have</h3><p>List whatever's in your fridge and ask AI for a recipe. No more wasted groceries or "there's nothing to eat" moments ever again.</p><div class="pbox"><div class="plabel">Try this prompt →</div><div class="ptext">"I have eggs, spinach, feta, and bread. Give me 2 easy meal ideas I can make in under 20 minutes."</div></div><div class="pills"><span class="pill">ChatGPT</span><span class="pill">Gemini</span></div></div>
+
+      <div class="card g"><span class="icon">📋</span><span class="tag g">3 min · Productivity</span><h3>Generate Any List Instantly</h3><p>Grocery lists, packing lists, gift ideas, to-do lists — AI generates a detailed, thoughtful list in seconds that would take you 20 minutes to write yourself.</p><div class="pbox"><div class="plabel">Try this prompt →</div><div class="ptext">"Give me a grocery list for a week of healthy meals for one person with an $80 budget."</div></div><div class="pills"><span class="pill">ChatGPT</span><span class="pill">Claude</span></div></div>
+
+      <div class="card g"><span class="icon">🤔</span><span class="tag g">2 min · Life Admin</span><h3>Decode Confusing Jargon</h3><p>Insurance policy, lease, medical report, tax form — paste the confusing text and ask AI to explain it like you're 12. Life-changing for paperwork.</p><div class="pbox"><div class="plabel">Try this prompt →</div><div class="ptext">"Explain this in plain English, I have no legal background: [paste confusing text here]"</div></div><div class="pills"><span class="pill">Claude</span><span class="pill">ChatGPT</span></div></div>
+
+      <div class="card g"><span class="icon">🎁</span><span class="tag g">3 min · Personal</span><h3>Get Perfect Gift Ideas</h3><p>Describe the person — age, interests, hobbies, your budget — and get a personalised list of thoughtful suggestions every time. Never blank on a gift again.</p><div class="pbox"><div class="plabel">Try this prompt →</div><div class="ptext">"Gift ideas for my 65-year-old mum who loves gardening, tea, and crime novels. Budget $50."</div></div><div class="pills"><span class="pill">ChatGPT</span><span class="pill">Claude</span></div></div>
+
+      <div class="card g"><span class="icon">📰</span><span class="tag g">2 min · Information</span><h3>Summarise Long Articles</h3><p>Found a long article you don't have time to read? Paste it in and ask for a 5-bullet summary. Get the key points in 30 seconds flat.</p><div class="pbox"><div class="plabel">Try this prompt →</div><div class="ptext">"Summarise this in 5 bullet points, plain and simple: [paste article text]"</div></div><div class="pills"><span class="pill">Claude</span><span class="pill">ChatGPT</span></div></div>
+
+      <div class="card g"><span class="icon">🗣️</span><span class="tag g">Voice · No Typing</span><h3>Speak — Don't Type!</h3><p>In the ChatGPT or Claude mobile app, tap the microphone and just speak your question. No typing needed. Perfect when your hands are full or you prefer talking.</p><div class="pbox"><div class="plabel">How to activate →</div><div class="ptext">Open the ChatGPT app → tap the waveform icon → speak naturally. It understands you perfectly and talks back.</div></div><div class="pills"><span class="pill">ChatGPT App</span><span class="pill">Claude App</span></div></div>
+
+      <div class="card g"><span class="icon">💬</span><span class="tag g">Daily · Everything</span><h3>Ask Anything at All</h3><p>"Why is my plant turning yellow?" "How do I remove a wine stain?" "What's the difference between a solicitor and barrister?" AI knows a little about everything.</p><div class="pbox"><div class="plabel">Try this prompt →</div><div class="ptext">"My car makes a clicking noise when I turn left. What might be causing it and should I be worried?"</div></div><div class="pills"><span class="pill">ChatGPT</span><span class="pill">Gemini</span><span class="pill">Copilot</span></div></div>
+    </div>
+
+    <div class="ibox g" style="margin-top:2rem"><span>🏆</span><div><strong>Beginner Challenge: Try 3 use cases this week</strong><p>Pick any 3 from above and actually do them — don't just read! Each takes under 5 minutes, and by the third one, using AI will feel completely natural.</p></div></div>
+    <div style="text-align:center;margin-top:2.5rem"><button class="btn a" onclick="go('intermediate')">Level Up to Intermediate 🚀</button></div>
+  </div>
+</div>
+
+<!-- INTERMEDIATE -->
+<div class="page" id="page-intermediate">
+  <div class="hero">
+    <div class="glow" style="width:500px;height:400px;background:var(--amber);top:-150px;right:10%"></div>
+    <div class="badge" style="border-color:var(--amber);color:var(--amber);background:rgba(245,158,11,.1)">🚀 Level 2 — Intermediate</div>
+    <h1>Go Further,<br><span style="color:var(--amber)">Do More</span></h1>
+    <p>You've tried the basics. Now it's time to use AI for bigger tasks — the kind that used to take hours and now take minutes.</p>
+  </div>
+  <div class="section">
+    <div class="xpwrap"><div class="xplabel">Level Progress</div><div class="xpbar"><div class="xpfill" style="width:66%;background:var(--amber)"></div></div></div>
+    <div class="ibox a"><span>⚡</span><div><strong>Intermediate Mindset</strong><p>Stop asking AI single questions. Start having full <strong>conversations</strong>. Give context, ask follow-ups, and refine until it's exactly right. You're the editor — AI is your first-draft machine.</p></div></div>
+    <h2 class="stitle" style="color:var(--amber)">Intermediate Use Cases 🚀</h2>
+    <p class="ssub">These take a little more back-and-forth — and deliver a lot more value.</p>
+    <div class="grid">
+      <div class="card a"><span class="icon">📄</span><span class="tag a">Career</span><h3>Build a Standout Resume</h3><p>Paste your current resume and the job posting. Ask AI to rewrite your bullet points to match the role with strong action verbs. A tailored, professional resume in minutes.</p><div class="pbox"><div class="plabel">Try this prompt →</div><div class="ptext">"Here's my resume: [paste]. Here's the job description: [paste]. Rewrite my experience section to better match this role with strong action verbs."</div></div><div class="pills"><span class="pill">Claude</span><span class="pill">ChatGPT</span></div></div>
+
+      <div class="card a"><span class="icon">✈️</span><span class="tag a">Travel</span><h3>Plan Your Entire Trip</h3><p>Tell AI your destination, duration, interests, and budget. It creates a day-by-day itinerary with restaurant picks, activities, and local tips — better than most travel agents.</p><div class="pbox"><div class="plabel">Try this prompt →</div><div class="ptext">"Plan a 7-day trip to Portugal for 2 people. We love history, local food, and beaches. Mid-range budget. Give a day-by-day itinerary."</div></div><div class="pills"><span class="pill">ChatGPT</span><span class="pill">Gemini</span></div></div>
+
+      <div class="card a"><span class="icon">💰</span><span class="tag a">Finance</span><h3>Create a Personal Budget</h3><p>Share your monthly income and rough expenses. AI builds a realistic budget, identifies areas to cut, and gives a simple savings plan — no financial advisor needed.</p><div class="pbox"><div class="plabel">Try this prompt →</div><div class="ptext">"Monthly take-home $3,200. Expenses: $1,100 rent, $400 food, $200 transport, $150 subscriptions. Build me a budget and find savings."</div></div><div class="pills"><span class="pill">Claude</span><span class="pill">ChatGPT</span></div></div>
+
+      <div class="card a"><span class="icon">📱</span><span class="tag a">Social Media</span><h3>Create a Month of Content</h3><p>Tell AI your niche, platform, and audience. It generates a 30-day content calendar with post ideas, captions, and hashtags. What used to take a full day: 15 minutes.</p><div class="pbox"><div class="plabel">Try this prompt →</div><div class="ptext">"Create 30 Instagram post ideas for a local bakery targeting families. Include captions and hashtags for each."</div></div><div class="pills"><span class="pill">ChatGPT</span><span class="pill">Claude</span></div></div>
+
+      <div class="card a"><span class="icon">🧠</span><span class="tag a">Learning</span><h3>Learn Anything, Your Way</h3><p>Want to learn investing, a language, or a new skill? AI is an infinitely patient personal tutor — adjusting to your level, giving exercises, and answering every question.</p><div class="pbox"><div class="plabel">Try this prompt →</div><div class="ptext">"Teach me the basics of investing in index funds. I'm a complete beginner. Start from zero and use simple analogies."</div></div><div class="pills"><span class="pill">Claude</span><span class="pill">ChatGPT</span></div></div>
+
+      <div class="card a"><span class="icon">🏠</span><span class="tag a">Home</span><h3>Plan Home Improvements</h3><p>Describe a room, your style, and your budget. AI gives you design ideas, a shopping list, and step-by-step plan — all without hiring a designer or contractor for advice.</p><div class="pbox"><div class="plabel">Try this prompt →</div><div class="ptext">"Small bedroom, 10x10ft, one window, $800 budget. I want a cozy modern look. Give me a full makeover plan with specific items to buy."</div></div><div class="pills"><span class="pill">ChatGPT</span><span class="pill">Claude</span></div></div>
+
+      <div class="card a"><span class="icon">🩺</span><span class="tag a">Health</span><h3>Build a Workout & Meal Plan</h3><p>Tell AI your fitness goals, current level, equipment, and food preferences. It builds a full week of workouts and matching meals — like a free personal trainer and nutritionist.</p><div class="pbox"><div class="plabel">Try this prompt →</div><div class="ptext">"Goal: lose 10 lbs in 3 months. I can train 4x/week at home with dumbbells. I don't eat pork. Create a workout AND meal plan."</div></div><div class="pills"><span class="pill">ChatGPT</span><span class="pill">Claude</span></div></div>
+
+      <div class="card a"><span class="icon">🤝</span><span class="tag a">Negotiation</span><h3>Prepare for Hard Conversations</h3><p>Salary negotiation, a difficult talk with a partner, a complaint to a business — describe the situation and AI helps you prepare what to say and anticipate objections.</p><div class="pbox"><div class="plabel">Try this prompt →</div><div class="ptext">"I want to ask my boss for a raise. 2 years in, more responsibilities, underpaid. Help me prepare exactly what to say."</div></div><div class="pills"><span class="pill">Claude</span><span class="pill">ChatGPT</span></div></div>
+    </div>
+
+    <div class="ibox a" style="margin-top:2rem"><span>🏆</span><div><strong>Intermediate Challenge: Use AI for something that used to take you 1+ hour</strong><p>The real "aha moment" comes when you finish in 10 minutes what used to take a whole afternoon. Pick one above and experience that this week.</p></div></div>
+    <div style="text-align:center;margin-top:2.5rem"><button class="btn p" onclick="go('advanced')">Level Up to Advanced ⚡</button></div>
+  </div>
+</div>
+
+<!-- ADVANCED -->
+<div class="page" id="page-advanced">
+  <div class="hero">
+    <div class="glow" style="width:600px;height:400px;background:var(--purple);top:-150px;right:-50px"></div>
+    <div class="badge" style="border-color:var(--purple);color:var(--purple);background:rgba(139,92,246,.1)">⚡ Level 3 — Advanced</div>
+    <h1>Multiply<br><span style="color:var(--purple)">Everything</span></h1>
+    <p>At this level, AI stops being a tool you use occasionally and becomes a system running in the background — multiplying what you can produce every single week.</p>
+  </div>
+  <div class="section">
+    <div class="xpwrap"><div class="xplabel">Level Progress</div><div class="xpbar"><div class="xpfill" style="width:100%;background:linear-gradient(to right,var(--purple),var(--amber))"></div></div></div>
+    <div class="ibox p"><span>🧠</span><div><strong>Advanced Mindset</strong><p>Advanced users don't ask AI questions — they build <strong>systems</strong>. They connect tools together, create reusable prompt libraries, automate repetitive tasks, and treat AI as a business partner, not a search engine.</p></div></div>
+    <h2 class="stitle" style="color:var(--purple)">Advanced Use Cases ⚡</h2>
+    <p class="ssub">These require more setup — and deliver transformational results.</p>
+    <div class="grid">
+      <div class="card p"><span class="icon">🤖</span><span class="tag p">Automation</span><h3>Automate Repetitive Workflows</h3><p>Connect AI to your apps using Zapier or Make. Example: every new email gets summarised by AI and action items added to your task list — automatically, while you sleep.</p><div class="pbox"><div class="plabel">Tools to use →</div><div class="ptext">Zapier + ChatGPT plugin, or Make.com + Claude API. Start with a free Zapier account and their pre-built AI templates.</div></div><div class="pills"><span class="pill">Zapier</span><span class="pill">Make.com</span><span class="pill">ChatGPT</span></div></div>
+
+      <div class="card p"><span class="icon">🏢</span><span class="tag p">Business</span><h3>Build a Custom AI Chatbot</h3><p>Create a chatbot trained on YOUR business — services, prices, FAQs — that handles customer questions 24/7. Chatbase or Voiceflow let you build this in a day, zero coding.</p><div class="pbox"><div class="plabel">How to start →</div><div class="ptext">Go to chatbase.co, upload your business info or website URL, and it builds a chatbot you can embed on any website instantly.</div></div><div class="pills"><span class="pill">Chatbase</span><span class="pill">Voiceflow</span><span class="pill">Botpress</span></div></div>
+
+      <div class="card p"><span class="icon">📊</span><span class="tag p">Analysis</span><h3>AI-Powered Data Analysis</h3><p>Upload a spreadsheet of sales, feedback, or surveys and ask AI to find patterns and write an executive report. ChatGPT can even generate charts directly from your data.</p><div class="pbox"><div class="plabel">Try this prompt →</div><div class="ptext">"[Upload CSV] Analyse this sales data. What are the top 3 trends? Which products are underperforming? Give me a 1-page executive summary."</div></div><div class="pills"><span class="pill">ChatGPT Plus</span><span class="pill">Claude</span></div></div>
+
+      <div class="card p"><span class="icon">🎨</span><span class="tag p">Creative</span><h3>Generate Images & Visuals</h3><p>Create logos, social graphics, product mockups, and marketing visuals without a designer. Describe what you want and AI generates professional images in seconds.</p><div class="pbox"><div class="plabel">Tools to try →</div><div class="ptext">DALL-E inside ChatGPT, Adobe Firefly (free with Adobe account), or Canva's AI image generator — all free to start.</div></div><div class="pills"><span class="pill">DALL-E</span><span class="pill">Firefly</span><span class="pill">Canva AI</span></div></div>
+
+      <div class="card p"><span class="icon">📝</span><span class="tag p">Productivity</span><h3>Build a Personal Prompt Library</h3><p>Save your best, most-used prompts in a document. Every time a prompt gets a great result, save it. In 3 months you'll have a personal toolkit that makes you consistently more productive.</p><div class="pbox"><div class="plabel">How to start →</div><div class="ptext">Create a Google Doc called "My AI Prompts." Categories: Email, Planning, Research, Work, Creative. Add one prompt per week.</div></div><div class="pills"><span class="pill">Google Docs</span><span class="pill">Notion</span><span class="pill">Any tool</span></div></div>
+
+      <div class="card p"><span class="icon">🎙️</span><span class="tag p">Meetings</span><h3>Turn Meetings into Action Items</h3><p>Use Otter.ai or Fireflies to auto-transcribe meetings. Paste the transcript into AI and get a summary, decisions made, and action items table with owners — in 60 seconds.</p><div class="pbox"><div class="plabel">Try this prompt →</div><div class="ptext">"Here's a meeting transcript: [paste]. Give me: 5-bullet summary, all decisions made, and an action items table with owner and deadline."</div></div><div class="pills"><span class="pill">Otter.ai</span><span class="pill">Fireflies</span><span class="pill">Claude</span></div></div>
+
+      <div class="card p"><span class="icon">💻</span><span class="tag p">Tech</span><h3>Build Apps Without Coding</h3><p>Describe a tool or website and AI builds it for you. Claude and ChatGPT write code; Cursor and Lovable let non-developers build real, working apps with AI doing the heavy lifting.</p><div class="pbox"><div class="plabel">Try this prompt →</div><div class="ptext">"Build me an HTML page that acts as a tip calculator. User enters bill and tip %, it shows total and tip per person."</div></div><div class="pills"><span class="pill">Claude</span><span class="pill">Cursor</span><span class="pill">Lovable</span></div></div>
+
+      <div class="card p"><span class="icon">📣</span><span class="tag p">Marketing</span><h3>Full Campaign in a Day</h3><p>Describe your product and audience. Ask AI to write the strategy, email sequence, social posts, ad copy, and landing page — all in one session. What agencies charge thousands for, done in hours.</p><div class="pbox"><div class="plabel">Try this prompt →</div><div class="ptext">"Create a full launch campaign for [product]. Include: positioning, 3-email sequence, 5 social posts, Google ad headline. Target: [audience]."</div></div><div class="pills"><span class="pill">Claude</span><span class="pill">ChatGPT</span></div></div>
+    </div>
+
+    <div class="ibox p" style="margin-top:2rem"><span>🏆</span><div><strong>Advanced Challenge: Automate one thing you currently do manually</strong><p>Look at your week. What repetitive task eats your time? Set up an AI workflow to handle it. Even saving 30 minutes a day adds up to 180+ hours a year.</p></div></div>
+
+    <div class="divider"></div>
+    <h2 class="stitle">Your Full Adoption Checklist 📋</h2>
+    <p class="ssub">How far along your journey are you?</p>
+    <ul class="checklist">
+      <li><span class="chk">🌱</span>Created a free AI account (ChatGPT or Claude)</li>
+      <li><span class="chk">🌱</span>Asked AI to write an email or message for me</li>
+      <li><span class="chk">🌱</span>Used AI to explain something confusing</li>
+      <li><span class="chk">🌱</span>Used voice mode on my phone instead of typing</li>
+      <li><span class="chk">🚀</span>Had a multi-turn conversation to refine an output</li>
+      <li><span class="chk">🚀</span>Used AI to save at least 1 hour on a real task</li>
+      <li><span class="chk">🚀</span>Used AI to help plan something (trip, budget, meals)</li>
+      <li><span class="chk">🚀</span>Installed an AI app on my phone</li>
+      <li><span class="chk">⚡</span>Built and saved a reusable prompt I use regularly</li>
+      <li><span class="chk">⚡</span>Connected two AI tools or services together</li>
+      <li><span class="chk">⚡</span>Automated at least one task I used to do manually</li>
+    </ul>
+    <div style="text-align:center;margin-top:2.5rem"><button class="btn g" onclick="go('home')">Back to Home 🏠</button></div>
+  </div>
+</div>
+
+<script>
+const navClass = {home:'w',beginner:'g',intermediate:'a',advanced:'p'};
+function go(id){
+  ['home','beginner','intermediate','advanced'].forEach(p=>{
+    document.getElementById('page-'+p).classList.remove('active');
+    const b=document.getElementById('nav-'+p);
+    b.classList.remove('active','w','g','a','p');
+    b.classList.add(navClass[p]);
+  });
+  document.getElementById('page-'+id).classList.add('active');
+  const ab=document.getElementById('nav-'+id);
+  ab.classList.add('active',navClass[id]);
+  window.scrollTo({top:0,behavior:'smooth'});
+  reveal();
+}
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';}});},{threshold:.07});
+function reveal(){
+  setTimeout(()=>{
+    document.querySelectorAll('#page-'+getCurrentPage()+' .card, #page-'+getCurrentPage()+' .lcard, #page-'+getCurrentPage()+' .sbox, #page-'+getCurrentPage()+' .checklist li').forEach((el,i)=>{
+      el.style.opacity='0';el.style.transform='translateY(20px)';
+      el.style.transition=`opacity .5s ease ${i*.06}s,transform .5s ease ${i*.06}s`;
+      obs.observe(el);
+    });
+  },50);
+}
+function getCurrentPage(){
+  const pages=['home','beginner','intermediate','advanced'];
+  return pages.find(p=>document.getElementById('page-'+p).classList.contains('active'))||'home';
+}
+reveal();
+</script>
+</body>
+</html>
